@@ -7,8 +7,6 @@ retorne um novo vetor representando a cor inversa.
 
 #include <stdio.h>
 
-int i;
-
 void inicializar (unsigned char *cor, unsigned int R, unsigned int G, unsigned int B) {
     cor[0] = R;
     cor[1] = G;
@@ -23,7 +21,7 @@ void imprimir (unsigned char *cor) {
 }
 
 void corInversa (unsigned char *cor, unsigned char *corComplementar) {
-    for (i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++) {
         corComplementar[i] = 255 - cor[i];
     }
 }

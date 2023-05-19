@@ -7,8 +7,6 @@ representam cores e retorne se eles representam a mesma cor.
 
 #include <stdio.h>
 
-int i, retorno;
-
 void inicializar (unsigned char *cor, unsigned int R, unsigned int G, unsigned int B) {
     cor[0] = R;
     cor[1] = G;
@@ -24,7 +22,7 @@ void verificarIgualdade (int retorno) {
 }
 
 int igualdade (unsigned char *corUm, unsigned char *corDois) {
-    for (i = 0; i < 3; i++) {
+    for (int i = 0; i < 3; i++) {
         if (corUm[i] != corDois[i]) {
             return 0;
         } else {
@@ -41,7 +39,7 @@ int main()
     inicializar(corUm, 255, 0, 0); // RED
     inicializar(corDois, 255, 0, 0); // RED
     
-    retorno = igualdade(corUm, corDois);
+    int retorno = igualdade(corUm, corDois);
     verificarIgualdade(retorno);
     
     inicializar(corUm, 255, 0, 0); // RED

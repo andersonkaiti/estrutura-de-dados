@@ -7,9 +7,6 @@ verde e azul, respectivamente, imprimindo a cor após cada alteração.
 
 #include <stdio.h>
 
-int i;
-
-
 void inicializar (unsigned char *cor, unsigned int R, unsigned int G, unsigned int B) {
     cor[0] = R;
     cor[1] = G;
