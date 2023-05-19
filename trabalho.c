@@ -1,4 +1,4 @@
-#include <stdio.h>z
+#include <stdio.h>
 #define MAX_TAM 100
 
 int main () {
