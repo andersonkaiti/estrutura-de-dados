@@ -3,58 +3,56 @@
 
 #define MAX_TAM 100
 
-int topo = -1;
-// determina que o topo, inicialmente, seja -1, já que, ao adicionar um elemento, o topo será 0.
-int pilha[MAX_TAM];
+int topo = -1; // A variável global topo é inicializada com o valor -1
+int pilha[MAX_TAM]; // É criado um vetor para representar a pilha
 
-void push (int item) {
-    if (topo == MAX_TAM - 1) {
+void push(int item) {
+    if (topo == MAX_TAM - 1) { // Verifica se a pilha está cheia
         printf("Pilha cheia.\n");
-        exit(1); // função da biblioteca stdlib; como o argumento é 1, retornará erro.
+        exit(1); // Função implementada pela biblioteca <stdlib.h>
     }
-    pilha[++topo] = item;
-    // aqui é feito o pré-incremento da variável global topo e depois a atribuição do valor item à pilha.
-    // o pré-incremento foi feito para simplificar o código.
+    pilha[++topo] = item; // Adiciona o item ao topo da pilha
+    // Foi feito um pré-incremento ++topo para simplificar o código
 }
 
-int pop () {
-    if (topo == -1) {
+int pop() {
+    if (topo == -1) { // Verifica se a pilha está vazia
         printf("Pilha vazia.\n");
         exit(1);
     }
-    return pilha[topo--];
+    return pilha[topo--]; // Remove e retorna o item do topo da pilha
+}
+
+int verificaParenteses(char expressao[]) {
+    for (int i = 0; expressao[i] != '\0'; i++) { // Percorre a string inteira
+    // o caractere \0 (null) serve para identificar o fim da string, ou seja, quando a expressão digitada chegar ao fim, o laço de repetição será finalizado.
+        if (expressao[i] == '(') { // Verifica se o caractere é uma abertura de parenteses
+            push(i); // Adiciona o índice atual à pilha
+        } else if (expressao[i] == ')') { // Verifica se o caractere é um fechamento de parenteses
+            if (topo == -1) { // Verifica se a pilha está vazia
+                printf("Erro: parenteses desbalanceados.\n");
+                return 0;
+            }
+            pop(); // Remove o item do topo da pilha
+        }
+    }
+
+    if (topo == -1) { // Verifica se a pilha está vazia (parênteses balanceados)
+        printf("Parenteses balanceados.\n");
+        return 1;
+    } else {
+        printf("Erro: parenteses desbalanceados.\n");
+        return 0;
+    }
 }
 
 int main() {
-    char expressao[MAX_TAM];
-    
+    char expressao[MAX_TAM]; // Vetor que armazena a expressão matemática
+
     printf("Digite uma expressão matemática: ");
-    fgets(expressao, MAX_TAM, stdin);
-    
-    for (int i = 0; expressao[i] != '\0'; i++) {
-        // o caractere \0 (null) serve para identificar o fim da string, ou seja,
-        // quando a expressão digitado chegar ao fim, o laço de repetição será finalizado.
-        if (expressao[i] == '(') {
-            push(i);
-        } else if (expressao[i] == ')') {
-            if (topo = -1) {
-                printf("Erro: parenteses desbalanceados.\n");
-                exit(1);
-            }
-            pop();
-        }
-    }
-    
-    if (topo == -1) {
-        printf("Parenteses balanceados.\n");
-    } else {
-        printf("Erro: parenteses desbalanceados.\n");
-        exit(1);
-    }
-    
-    return 0;
+    fgets(expressao, MAX_TAM, stdin); // Lê a expressão digitada pelo usuário incluindo espaços
+
+    int resultado = verificaParenteses(expressao); // Chama a função verificaParenteses
+
+    return resultado;
 }
-
-
-
-
