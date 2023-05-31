@@ -1,23 +1,60 @@
 #include <stdio.h>
+#include <stdlib.h>
+
 #define MAX_TAM 100
 
-int main () {
-    char expressao[MAX_TAM];
-    int quant = -1, i = 0; // a variável quant começa com -1 porque o índice da primeira posição de char expressao é 0, então, ao realizar o primeiro incremento, quant será 0.
+int topo = -1;
+// determina que o topo, inicialmente, seja -1, já que, ao adicionar um elemento, o topo será 0.
+int pilha[MAX_TAM];
 
-    printf("Digite uma expressão: ");
-    fgets(expressao, MAX_TAM, stdin); // o último caractere sempre será \n.
-    
-    while (expressao[i] != '\0') {
-        quant++; // conta quantas letras existem em expressao, incluindo o \n do fgets.
-        i++; // índice para terminar o laço de repetição while.
+void push (int item) {
+    if (topo == MAX_TAM - 1) {
+        printf("Pilha cheia.\n");
+        exit(1); // função da biblioteca stdlib; como o argumento é 1, retornará erro.
     }
+    pilha[++topo] = item;
+    // aqui é feito o pré-incremento da variável global topo e depois a atribuição do valor item à pilha.
+    // o pré-incremento foi feito para simplificar o código.
+}
 
-    if (expressao[quant - 1] == ')') { // remove o \n da função fgets, o que faz o if conferir se o último caractere é igual a ).
-        printf("Expressão balanceada.");
+int pop () {
+    if (topo == -1) {
+        printf("Pilha vazia.\n");
+        exit(1);
+    }
+    return pilha[topo--];
+}
+
+int main() {
+    char expressao[MAX_TAM];
+    
+    printf("Digite uma expressão matemática: ");
+    fgets(expressao, MAX_TAM, stdin);
+    
+    for (int i = 0; expressao[i] != '\0'; i++) {
+        // o caractere \0 (null) serve para identificar o fim da string, ou seja,
+        // quando a expressão digitado chegar ao fim, o laço de repetição será finalizado.
+        if (expressao[i] == '(') {
+            push(i);
+        } else if (expressao[i] == ')') {
+            if (topo = -1) {
+                printf("Erro: parenteses desbalanceados.\n");
+                exit(1);
+            }
+            pop();
+        }
+    }
+    
+    if (topo == -1) {
+        printf("Parenteses balanceados.\n");
     } else {
-        printf("Expressão desbalanceada.");
+        printf("Erro: parenteses desbalanceados.\n");
+        exit(1);
     }
     
     return 0;
 }
+
+
+
+
