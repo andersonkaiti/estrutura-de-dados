@@ -9,10 +9,10 @@ int tamanho = -1;
 
 void enfileirarFinal(int valor) {
     if (posicao >= MAXIMO) { // Verifica se a fila já está cheia.
-        printf("Fila cheia.");
+        printf("Fila cheia.\n");
     } else { // Se a fila ainda não estiver cheia:
         tamanho++; // Incrementa o tamanho.
-        fila = realloc(fila, tamanho * sizeof(fila)); // Realiza um redimensionamento na memória.
+        fila = realloc(fila, tamanho * sizeof(int)); // Realiza um redimensionamento na memória.
         fila[posicao++] = valor; // Atribui o valor à respectiva posição na fila.
         // E incrementa posicao.
     }
@@ -24,7 +24,7 @@ void enfileirarInicio(int valor) {
     }
     tamanho++;
     posicao++;
-    fila = realloc(fila, tamanho * sizeof(fila)); // Realiza um redimensionamento na memória.
+    fila = realloc(fila, tamanho * sizeof(int)); // Realiza um redimensionamento na memória.
     fila[0] = valor; // Atribui o valor à primeira posição da fila.
 }
 
@@ -37,7 +37,7 @@ void desenfileirarInicio() {
         }
         posicao--; // Decrementa posicao.
         tamanho--; // Decrementa tamanho.
-        fila = realloc(fila, tamanho * sizeof(fila)); // Realiza um redimensionamento na memória.
+        fila = realloc(fila, tamanho * sizeof(int)); // Realiza um redimensionamento na memória.
     }
 }
 
@@ -47,7 +47,7 @@ void desenfileirarFinal() {
     } else {
         posicao--;
         tamanho--;
-        fila = realloc(fila, tamanho * sizeof(fila));
+        fila = realloc(fila, tamanho * sizeof(int));
     }
 }
 
